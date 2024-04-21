@@ -1,7 +1,7 @@
 from fastapi import Body, Depends, APIRouter, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import  timedelta
-from src.model.models import User, Token
+from src.model.user_auth_models import User, Token
 from dotenv import load_dotenv
 import os
 import src.service.user_auth_service as uas
