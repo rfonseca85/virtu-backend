@@ -11,12 +11,15 @@ class TokenData(BaseModel):
 
 
 class User(BaseModel):
-    username: str
+    clerkId: str
     email: str
-    full_name: str
-    password: str
-    app_name: str
-    disabled: bool
+    username: str
+    photo: str
+    firstName: str
+    lastName: str
+    planId: int
+    creditBalance: int
+
 
 
 

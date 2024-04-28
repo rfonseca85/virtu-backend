@@ -8,7 +8,7 @@ import src.service.user_auth_service as uas
 router = APIRouter(tags=["virtu_chef"])
 
 @router.post("/get_receipe", response_model=Receipe)
-async def get_receipe(file: UploadFile = File(...), current_user: User = Depends(uas.get_current_active_user)):
+async def get_receipe(file: UploadFile = File(...), current_user: User = Depends(uas.get_current_user)):
     # Read the image file
     image_data = await file.read()
     image_base64 = base64.b64encode(image_data).decode("utf-8")

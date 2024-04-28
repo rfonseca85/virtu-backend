@@ -12,7 +12,7 @@ import os
 load_dotenv()
 
 client = MongoClient(os.getenv("MONGO_URI"))
-db = client['virtu-ai']
+db = client['virtu-hunter-db']
 users_collection = db['users']
 
 # Create a password context
@@ -51,12 +51,12 @@ def create_user(user: User) -> User:
 
 def create_access_token(data: dict, expires_delta: timedelta ):
     to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.utcnow() + expires_delta
-    else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
+    # if expires_delta:
+    #     expire = datetime.utcnow() + expires_delta
+    # else:
+    #     expire = datetime.utcnow() + timedelta(minutes=15)
 
-    to_encode.update({"exp": expire})
+    # to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, os.getenv("SECRET_KEY"), algorithm=os.getenv("ALGORITHM"))
     return encoded_jwt
 
@@ -74,17 +74,10 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     except JWTError:
         raise credential_exception
 
-    user = users_collection.find_one({"username": token_data.username})
+    user = users_collection.find_one({"clerkId": token_data.username})
     if user is None:
         raise credential_exception
 
     return User(**user)
-
-
-async def get_current_active_user(current_user: User = Depends(get_current_user)):
-    if current_user.disabled:
-        raise HTTPException(status_code=400, detail="Inactive user")
-
-    return current_user
 
 
