@@ -1,11 +1,11 @@
 from fastapi import APIRouter, UploadFile, File, Depends
-from src.model.virtu_chef_models import Receipe
-from src.model.user_auth_models import User
+from src.virtu_chef.models.virtu_chef_models import Receipe
+from src.auth.model.user_auth_models import User
 import base64
-import src.service.virtu_chef_service as vcs
-import src.service.user_auth_service as uas
+import src.virtu_chef.service.virtu_chef_service as vcs
+import src.auth.service.user_auth_service as uas
 
-router = APIRouter(tags=["virtu_chef"])
+router = APIRouter(tags=["Virtu.chef"])
 
 @router.post("/get_receipe", response_model=Receipe)
 async def get_receipe(file: UploadFile = File(...), current_user: User = Depends(uas.get_current_user)):

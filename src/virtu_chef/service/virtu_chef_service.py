@@ -2,8 +2,8 @@ import os
 from openai import OpenAI
 import json
 from dotenv import load_dotenv
-import src.prompts.virtu_chef_prompts as prompts
-from src.model.virtu_chef_models import Receipe
+import src.virtu_chef.prompts.virtu_chef_prompts as prompts
+from src.virtu_chef.models.virtu_chef_models import Receipe
 
 load_dotenv()
 

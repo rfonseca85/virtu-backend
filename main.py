@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.routes import health_check, user_auth, virtu_chef
+from src.auth.routes import health_check, user_auth
+from src.virtu_chef.routes import virtu_chef
+from src.virtu_hunter.routes import virtu_hunter
 
 app = FastAPI()
 
@@ -15,7 +17,6 @@ app.add_middleware(
 
 # Add routes
 app.include_router(health_check.router)
-app.include_router(user_auth.router)
-
-# Add virtu chef routes
+# app.include_router(user_auth.router)
 app.include_router(virtu_chef.router)
+app.include_router(virtu_hunter.router)

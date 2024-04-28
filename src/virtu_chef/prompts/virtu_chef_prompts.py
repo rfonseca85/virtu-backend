@@ -1,4 +1,4 @@
-from src.model.virtu_chef_models import Receipe
+from src.virtu_chef.models.virtu_chef_models import Receipe
 user_prompt = """
 You are a master chef and you have been asked to create the same dish as the image sent
 

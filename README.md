@@ -12,5 +12,5 @@ echo "ENVIRONMENT=prod"
 
 poetry install
 poetry shell
-poetry run uvicorn main:app --reload --port 8080
+poetry run uvicorn main:app --reload --port 7001
 ```

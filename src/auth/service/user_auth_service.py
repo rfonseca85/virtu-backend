@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordBearer
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from src.model.user_auth_models import TokenData, User
+from src.auth.model.user_auth_models import TokenData, User
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
