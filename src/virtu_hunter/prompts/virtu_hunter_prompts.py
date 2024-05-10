@@ -17,3 +17,36 @@ def get_coverletter_prompt(coverletter_request: CoverLetterRequest):
     Return just the cover letter text.
     
     """
+
+
+def get_resumeanalisys_prompt(resume: str):
+    return f"""
+
+    You are a specialist writing resume and you are analyzing a resume.
+    Here is the resume separated by paragraphs (2 lines separation): {resume}.
+    
+    please return a json with the following structure:
+    {
+        "paragraph": "This is the first paragraph",
+        "suggestions": ["Suggestion 1", "Suggestion 2", "Suggestion 3"]
+    },
+    {
+        "paragraph": "This is the second paragraph",
+        "suggestions": ["Suggestion 1", "Suggestion 2", "Suggestion 3"]
+    },
+    {
+        "paragraph": "This is the third paragraph",
+        "suggestions": ["Suggestion 1", "Suggestion 2", "Suggestion 3"]
+    },
+    {
+        "paragraph": "This is the fourth paragraph",
+        "suggestions": ["Suggestion 1", "Suggestion 2", "Suggestion 3"]
+    },
+    
+    for each one of those paragraphs.
+    If a paragraph has no suggestions, return an empty list.
+
+    return just the json.
+
+    """
+

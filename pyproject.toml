@@ -17,6 +17,10 @@ passlib = "^1.7.4"
 pymongo = "^4.6.3"
 python-dotenv = "^1.0.1"
 bcrypt = "4.0.1"
+python-docx = "^1.1.0"
+websockets = "^12.0"
+llm = "^0.13.1"
+docxtpl = "^0.17.0"
 
 
 [build-system]
