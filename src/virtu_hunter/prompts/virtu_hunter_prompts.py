@@ -18,6 +18,53 @@ def get_coverletter_prompt(coverletter_request: CoverLetterRequest):
     
     """
 
+def get_uploadresume_prompt(resume: str):
+    return """
+    Based on the resume uploaded, please add all the information in the json format below:
+    Return just the json.
+    This is the resume: """ + resume + """
+    
+    Please return a json with the following structure:
+
+    { 
+        'name' : "", 
+           'lastName' : '',
+            'title': '',
+            'contact': {
+                'city': '',
+                'province': '',
+                'phone': '',
+                'email': '',
+                'linkedin': ''
+                },
+             'summary': '', 
+             'experiences': [
+                  {
+                      'companyName': '',
+                      'title': '',
+                      'startDate': '',
+                      'endDate': '',
+                      'description': [{'point': ''}, {'point': ''}]
+                  },
+             ], 
+            'skills': [
+                {
+                    'category': '',
+                    'description': ''
+                },
+            ],
+             'education': [
+                 {
+                     'degree': '',
+                     'school': '',
+                     'startDate': '',
+                     'endDate': ''
+                 }
+             ],    
+            }
+
+    """
+
 
 def get_resumeanalisys_prompt(resume: str):
     return f"""

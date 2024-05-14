@@ -1,15 +1,17 @@
 from typing import Awaitable, Callable, List
-from fastapi import APIRouter, UploadFile, File, Depends
+from fastapi import APIRouter, Body, UploadFile, File, Depends
 import base64
 from src.virtu_hunter.models.virtu_hunter_models import CoverLetter, CoverLetterRequest
 from src.auth.model.user_auth_models import User
 import src.auth.service.user_auth_service as uas
-import src.virtu_hunter.service.coverletter_service as vhs
+import src.virtu_hunter.service.uploadresume_service as urs
 from fastapi import WebSocket
 from openai import AsyncOpenAI, OpenAI
 import os
 from dotenv import load_dotenv
 from openai.types.chat import ChatCompletionMessageParam, ChatCompletionChunk
+from docx import Document
+from io import BytesIO
 
 
 load_dotenv()
@@ -18,12 +20,21 @@ client = OpenAI()
 
 router = APIRouter(tags=["Virtu.hunter"])
 
-# @router.post("/coverletter")#response_model=CoverLetter
-# async def generate_coverletter(request: CoverLetterRequest, current_user: User = Depends(uas.get_current_user)):
-#     # Read the image file
-#     coverletter = vhs.get_coverletter(request) 
-#     # CoverLetter = CoverLetter(coverletter=coverletter)
-#     return coverletter
+@router.post("/uploadresume")#response_model=CoverLetter
+async def upload_resume(resume: UploadFile = File(...)): #, current_user: User = Depends(uas.get_current_user)):
+  
+    # Read the uploaded file
+    resume_bytes = await resume.read()
+
+    # Convert the bytes to a docx Document
+    document = Document(BytesIO(resume_bytes))
+
+    # Extract the text from the Document
+    resume_text = "\n".join([paragraph.text for paragraph in document.paragraphs])
+
+    # Pass the text to your upload_resume function
+    resume_json = urs.upload_resume(resume_text) 
+    return resume_json
 
 
 
